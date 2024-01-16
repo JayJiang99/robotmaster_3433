@@ -17,7 +17,7 @@ class RobotTask:
 
     def run_task_rotate_marker_detection(self):
         self.ep_camera.start_video_stream(display=False)
-        self.mover.rotate(z_value = 10,duration=15)
+        self.mover.rotate_w_speed(z_value = 10,duration=15)
         start_time = time.time()
         while time.time() - start_time < 15:
             img = self.ep_camera.read_cv2_image(strategy="newest", timeout=0.5)
