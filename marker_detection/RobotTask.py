@@ -15,13 +15,12 @@ class RobotTask:
         self.detector = MarkerDetector(self.ep_vision)
         self.mover = RobotMover(self.ep_chassis)
 
-    def run_task(self):
+    def run_task_rotate_marker_detection(self):
         self.ep_camera.start_video_stream(display=False)
-        self.mover.rotate(duration=15)
+        self.mover.rotate(z_value = 10,duration=15)
         start_time = time.time()
         while time.time() - start_time < 15:
             img = self.ep_camera.read_cv2_image(strategy="newest", timeout=0.5)
-            self.detector.detect_markers(img)
             img_with_markers = self.detector.draw_markers(img)
             cv2.imshow("Markers", img_with_markers)
             cv2.waitKey(1)
@@ -33,9 +32,7 @@ class RobotTask:
 
 if __name__ == '__main__':
     task = RobotTask()
-
-    
     try:
-        task.run_task()
+        task.run_task_rotate_marker_detection()
     finally:
         task.close()
