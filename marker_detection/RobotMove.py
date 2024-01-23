@@ -11,6 +11,7 @@ class RobotMover:
     
     def move_horizontal_distance(self, y_val, xy_speed = 0.7):
         self.ep_chassis.move(x=0, y=y_val, z=0, xy_speed=xy_speed).wait_for_completed()
-    
+    def move_xydistance(self, x_val, y_val, xy_speed = 0.1):
+        self.ep_chassis.move(x=x_val, y=y_val, z=0, xy_speed=xy_speed).wait_for_completed()
     def stop(self):
         self.ep_chassis.move(z=0, xy_speed=0).wait_for_completed()
